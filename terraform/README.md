@@ -24,26 +24,31 @@ To build the projects with Terraform follow these steps.
 1. Update `variables.tf` with your registered domain and region.
 
 2. Add project to main.tf. For example, to add the EC2 website project add this:
-```
-module "website_ec2_instance" {
-  source = "./modules/aws-ec2-website"
-  tags = {
-    Terraform = "true"
-  }
-}
-```
+    ```
+    module "website_ec2_instance" {
+      source = "./modules/aws-ec2-website"
+      tags = {
+        Terraform = "true"
+      }
+    }
+    ```
 
 3. Initialize Terraform.
-`terraform init`
+
+   `terraform init`
 
 4. Run terraform plan.
-`terraform plan`
+
+   `terraform plan`
 
 5. Run terraform apply.
-`terraform apply`
+
+   `terraform apply`
 
 6. Initialize Terrform again. This is required to build the backend.tf file to use S3.
-`terraform init`
+
+   `terraform init`
 
 7. When finished, destroy Terraform project. S3 bucket will need to be deleted manually.
-`terraform destroy`
+
+   `terraform destroy`
