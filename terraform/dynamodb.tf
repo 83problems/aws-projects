@@ -1,11 +1,11 @@
 resource "aws_dynamodb_table" "tf_state_lock" {
   name = "tf_state_lock"
-  billing = "PAY_PER_REQUEST"
+  billing_mode = "PAY_PER_REQUEST"
   #read_capacity = 10
   #write_capacity = 10
   hash_key = "LockID"
 
-  attribute = {
+  attribute {
     name = "LockID"
     type = "S"
   }
