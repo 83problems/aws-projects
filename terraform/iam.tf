@@ -1,5 +1,5 @@
 resource "aws_iam_role" "tfstate_bucket_role" {
-  name = "tfstate_bucket_role"
+  name               = "tfstate_bucket_role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -18,12 +18,12 @@ EOF
 
   tags = {
     Terraform = true
-    Name = "iam_tfstate_bucket_role"
+    Name      = "iam_tfstate_bucket_role"
   }
 }
 
 resource "aws_iam_policy" "tf_s3_access" {
-  name = "tf_s3_access_policy"
+  name        = "tf_s3_access_policy"
   description = "Store Terraform state file in S3."
 
   policy = <<EOT
@@ -46,12 +46,12 @@ EOT
 
   tags = {
     Terraform = true
-    Name = "iam_policy_tfstate"
+    Name      = "iam_policy_tfstate"
   }
 }
 
 resource "aws_iam_role_policy_attachment" "tfstate_role_policy_attachment" {
-  role = aws_iam_role.tfstate_bucket_role.name
+  role       = aws_iam_role.tfstate_bucket_role.name
   policy_arn = aws_iam_policy.tf_s3_access.arn
 }
 
