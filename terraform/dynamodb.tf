@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "tf_state_lock" {
-  name = "tf_state_lock"
+  name    = "tf_state_lock"
   billing = "PAY_PER_REQUEST"
   #read_capacity = 10
   #write_capacity = 10
@@ -12,6 +12,6 @@ resource "aws_dynamodb_table" "tf_state_lock" {
 
   tags = {
     Terraform = true
-    Name = "tf_state_lock"
+    Name      = "tf_state_lock"
   }
 }
