@@ -1,5 +1,4 @@
 import boto3
-import botocore
 import argparse
 import configparser
 import logging
@@ -12,11 +11,11 @@ def get_vpc_id(session):
         Filters=[
             {
                 'Name': 'tag:Name',
-                'Values': [ 'vpc_primary' ]
+                'Values': ['vpc_primary']
             },
             {
                 'Name': 'tag:Boto3',
-                'Values': [ 'true' ]
+                'Values': ['true']
             },
         ],
     )
@@ -172,11 +171,11 @@ def cleanup(session, aws_domain_name):
         Filters=[
             {
                 'Name': 'tag:Name',
-                'Values': [ 'vpc_primary' ]
+                'Values': ['vpc_primary']
             },
             {
                 'Name': 'tag:Boto3',
-                'Values': [ 'true' ]
+                'Values': ['true']
             },
         ],
     )
@@ -192,7 +191,7 @@ def cleanup(session, aws_domain_name):
         Filters=[
             {
                 'Name': 'tag:Name',
-                'Values': [ 'vpc_primary_internet_gateway' ]
+                'Values': ['vpc_primary_internet_gateway']
             },
         ],
 
@@ -208,12 +207,12 @@ def cleanup(session, aws_domain_name):
         Filters=[
             {
                 'Name': 'vpc-id',
-                'Values': [ vpc_id ]
+                'Values': [vpc_id]
             },
         ],
     )
     for subnet in subnets['Subnets']:
-        #print(subnet['SubnetId'])
+        # print(subnet['SubnetId'])
         logging.info('Deleting Subnet.')
         ec2c.delete_subnet(
             SubnetId=subnet['SubnetId']
