@@ -13,6 +13,7 @@ This directory stores Terraform files to provision AWS resources. The Terraform 
 $ export AWS_ACCESS_KEY_ID="YOUR ACCESS KEY ID"
 $ export AWS_SECRET_ACCESS_KEY="YOUR SECRET ACCESS KEY"
 ```
+
 ## Features
 
 * The base configuration will create a VPC with two subnets in two Availability Zones. The public subnet has an Internet Gateway and the private subnet has a NAT Gateway. The Terraform state file is stored in S3 and lock file is controlled by DynamoDB.
