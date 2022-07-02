@@ -38,3 +38,7 @@ To build the projects with Python/Boto3 follow these steps.
 5. Install baseline AWS project.
 
    `python aws_baseline.py`
+
+6. To cleanup project.
+
+   `python aws_baseline.py -c`
