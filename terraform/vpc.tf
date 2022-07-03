@@ -164,4 +164,3 @@ resource "aws_route_table_association" "vpc_primary_rt_3" {
   subnet_id = aws_subnet.vpc_primary_subpri_1b.id
   route_table_id = aws_route_table.vpc_primary_route_private_2.id
 }
-

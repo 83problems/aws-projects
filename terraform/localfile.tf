@@ -13,6 +13,6 @@ data "template_file" "tf_state_template" {
 }
 
 resource "local_file" "tf_state_file" {
-  content = data.template_file.tf_state_template.rendered
+  content  = data.template_file.tf_state_template.rendered
   filename = "backend.tf"
 }
