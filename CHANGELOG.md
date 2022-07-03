@@ -7,6 +7,7 @@
 - Lint check for Python files
 - Internet/NAT gateway for Boto3 baseline
 - EIP for Boto3 baseline
+- Second NAT Gateway for Terraform baseline
 
 ## 0.0.2 - 2022-06-27
 

@@ -87,46 +87,81 @@ resource "aws_route_table_association" "vpc_primary_rt_4" {
   route_table_id = aws_route_table.vpc_primary_route_public.id
 }
 
-resource "aws_nat_gateway" "vpc_primary_ng" {
-  allocation_id = aws_eip.vpc_primary_lb.id
+resource "aws_nat_gateway" "vpc_primary_ngw_1" {
+  allocation_id = aws_eip.vpc_primary_eip_1.id
   subnet_id = aws_subnet.vpc_primary_subpub_1a.id
 
   tags = {
     Terraform = true
-    Name = "vpc_primary_ng"
+    Name = "vpc_primary_ngw_1"
   }
+  depends_on = [aws_internet_gateway.vpc_primary_gateway]
 }
 
-resource "aws_eip" "vpc_primary_lb" {
+resource "aws_nat_gateway" "vpc_primary_ngw_2" {
+  allocation_id = aws_eip.vpc_primary_eip_2.id
+  subnet_id = aws_subnet.vpc_primary_subpub_1b.id
+
+  tags = {
+    Terraform = true
+    Name = "vpc_primary_ngw_2"
+  }
+  depends_on = [aws_internet_gateway.vpc_primary_gateway]
+}
+
+resource "aws_eip" "vpc_primary_eip_1" {
   vpc = true
   
   tags = {
     Terraform = true
-    Name = "vpc_primary_lb"
+    Name = "vpc_primary_eip_1"
   }
 }
 
-resource "aws_route_table" "vpc_primary_route_private" {
+resource "aws_eip" "vpc_primary_eip_2" {
+  vpc = true
+  
+  tags = {
+    Terraform = true
+    Name = "vpc_primary_eip_2"
+  }
+}
+
+resource "aws_route_table" "vpc_primary_route_private_1" {
   vpc_id = aws_vpc.vpc_primary.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.vpc_primary_ng.id
+    gateway_id = aws_nat_gateway.vpc_primary_ngw_1.id
   }
 
   tags = {
     Terraform = true
-    Name = "vpc_primary_route_private"
+    Name = "vpc_primary_route_private_1"
+  }
+}
+
+resource "aws_route_table" "vpc_primary_route_private_2" {
+  vpc_id = aws_vpc.vpc_primary.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.vpc_primary_ngw_2.id
+  }
+
+  tags = {
+    Terraform = true
+    Name = "vpc_primary_route_private_2"
   }
 }
 
 resource "aws_route_table_association" "vpc_primary_rt_1" {
   subnet_id = aws_subnet.vpc_primary_subpri_1a.id
-  route_table_id = aws_route_table.vpc_primary_route_private.id
+  route_table_id = aws_route_table.vpc_primary_route_private_1.id
 }
 
 resource "aws_route_table_association" "vpc_primary_rt_3" {
   subnet_id = aws_subnet.vpc_primary_subpri_1b.id
-  route_table_id = aws_route_table.vpc_primary_route_private.id
+  route_table_id = aws_route_table.vpc_primary_route_private_2.id
 }
 
