@@ -1,4 +1,4 @@
-name: Lint
+name: Terraform Lint
 
 on: [push]
 
@@ -8,7 +8,7 @@ jobs:
     name: Validate terraform configuration
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: terraform validate
         uses: dflook/terraform-validate@v1
