@@ -1,21 +1,3 @@
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners = [ "amazon" ]
-  
-  filter {
-    name = "name"
-    values = [ var.amazon_linux_ami ]
-  }
-}
-
-data "template_file" "userdata" {
-  template = "${file("${path.module}/files/user_data.sh")}"
-
-  vars = {
-    "aws_region"       = var.aws_region
-  }
-}
-
 resource "aws_instance" "simple_website" {
   ami = data.aws_ami.amazon_linux.id
   instance_type = var.instance_type
@@ -23,11 +5,12 @@ resource "aws_instance" "simple_website" {
 
   key_name  = aws_key_pair.ec2_simple_website_key.key_name
   subnet_id = var.subnet.id
-  user_data = data.template_file.userdata.rendered
+  user_data = templatefile("${path.module}/files/user_data.sh", {
+    "aws_region" = var.aws_region
+  })
   
   vpc_security_group_ids = [
-    var.allow_ssh.id,
-    var.allow_tls.id,
+    var.simple_website_sg.id,
   ]
 
   root_block_device {
@@ -47,10 +30,14 @@ resource "aws_instance" "simple_website" {
     Terraform = true
     Name = "ec2_simple_website"
   }
+}
+
+resource "aws_eip" "vpc_primary_eip_1" {
+  vpc = true
+  instance = aws_instance.simple_website.id
   
-  #depends_on = [
-  #  aws_subnet.subnet,
-  #  aws_security_group.allow_ssh,
-  #  aws_security_group.allow_tls
-  #]
+  tags = { 
+    Terraform = true
+    Name = "Primary VPC EIP"
+  }
 }

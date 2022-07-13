@@ -7,7 +7,11 @@ resource "aws_iam_role" "ec2InstanceRole" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": ["ec2.amazonaws.com", "ssm.amazonaws.com"]
+        "Service": [
+          "ec2.amazonaws.com",
+          "iam.amazonaws.com",
+          "ssm.amazonaws.com"
+        ]
       },
       "Effect": "Allow",
       "Sid": ""
@@ -26,3 +30,4 @@ resource "aws_iam_instance_profile" "ec2InstanceProfile" {
   name     = "EC2_Instance_Profile"
   role     = aws_iam_role.ec2InstanceRole.name
 }
+

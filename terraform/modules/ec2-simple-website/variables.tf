@@ -1,6 +1,6 @@
 variable "amazon_linux_ami" {
   description = "Amazon Linux AMI search string"
-  default = "amzn-ami-hvm-*-x86_64*"
+  default = "amzn2-ami-hvm-*-gp2"
 }
 
 variable "disk_size" {
@@ -21,11 +21,11 @@ variable "aws_region" {
 variable "subnet" {
 }
 
-variable "allow_ssh" {
-}
-
-variable "allow_tls" {
+variable "simple_website_sg" {
 }
 
 variable "instance_type" {
+}
+
+variable domainname {
 }

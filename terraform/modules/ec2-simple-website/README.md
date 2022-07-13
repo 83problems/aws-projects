@@ -11,8 +11,8 @@ module "ec2_simple_website" {
   source = "./modules/ec2-simple-website"
   aws_region = var.region
   instance_type = var.instance_type
-  subnet = aws_subnet.vpc_primary_subpub_1a
-  allow_ssh = aws_security_group.allow_ssh
-  allow_tls = aws_security_group.allow_tls
+  subnet = aws_subnet.public_subnet
+  domainname = var.domainname
+  simple_website_sg = aws_security_group.simple_website_sg
 }
 ```
