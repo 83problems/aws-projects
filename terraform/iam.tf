@@ -54,8 +54,3 @@ resource "aws_iam_role_policy_attachment" "tfstate_role_policy_attachment" {
   role       = aws_iam_role.tfstate_bucket_role.name
   policy_arn = aws_iam_policy.tf_s3_access.arn
 }
-
-#resource "aws_iam_instance_profile" "tfstate_instance_profile" {
-#  name = "terraform_state_instance_profile"
-#  role = aws_iam_role.tfstate_bucket_role.name
-#}
