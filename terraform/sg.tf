@@ -5,7 +5,7 @@ resource "aws_security_group" "simple_website_sg" {
 
   tags = {
     Terraform = true
-    Name = "Allow inbound/outbound traffic"
+    Name      = "Allow inbound/outbound traffic"
   }
 }
 

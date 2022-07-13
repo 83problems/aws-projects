@@ -1,18 +1,18 @@
-data "aws_ami" "amazon_linux" {                                                                         
+data "aws_ami" "amazon_linux" {
   most_recent = true
-  owners = [ "amazon" ]
-  
+  owners      = ["amazon"]
+
   filter {
-    name = "name"
-    values = [ var.amazon_linux_ami ]
+    name   = "name"
+    values = [var.amazon_linux_ami]
   }
 }
 
 data "template_file" "userdata" {
   template = file("${path.module}/files/user_data.sh")
 
-  vars = { 
-    "aws_region"       = var.aws_region
+  vars = {
+    "aws_region" = var.aws_region
   }
 }
 
