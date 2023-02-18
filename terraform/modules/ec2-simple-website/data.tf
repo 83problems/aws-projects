@@ -16,9 +16,6 @@ data "template_file" "userdata" {
   }
 }
 
-data "aws_route53_zone" "primary" {
-  name = "${var.domainname}."
-}
+data "aws_route53_zone" "primary" {}
 
-data "aws_caller_identity" "current" {
-}
+data "aws_caller_identity" "current" {}
