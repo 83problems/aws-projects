@@ -16,7 +16,7 @@ resource "aws_kms_key" "domaindnssec" {
   deletion_window_in_days  = 7
   key_usage                = "SIGN_VERIFY"
   policy = jsonencode({
-   Statement = [
+    Statement = [
       {
         Action = [
           "kms:DescribeKey",
